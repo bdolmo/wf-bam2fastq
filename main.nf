@@ -5,7 +5,7 @@ nextflow.enable.dsl = 2
 // Define parameters for input/output directories and maximum CPU threads
 params.bam_dir = "/home/minion/Desktop/wf-template/test_data"   // Path where BAM files are located
 params.out_dir = "/home/minion/Desktop/output_test"             // Output directory for FASTQ files
-params.threads = 4                                              // Number of threads for samtools
+params.threads = 12                                              // Number of threads for samtools
 
 // Create a channel for BAM files
 bam_files = Channel.fromPath("${params.bam_dir}/*.bam")
@@ -14,11 +14,11 @@ bam_files = Channel.fromPath("${params.bam_dir}/*.bam")
 converted_files = []
 
 process bamToFastq {
-    publishDir params.out_dir
+    container 'quay.io/biocontainers/samtools:1.10--h2e538c0_3'
+    // publishDir params.out_dir
     tag "${bam_file.simpleName}"                                // Tag the process with the BAM filename
     cpus params.threads                                         // Set the number of threads per process
     memory '2 GB'
-    container "biocontainers/samtools:v1.9-4-deb_cv1"
 
     input:
     path bam_file                                               // Automatically takes each BAM file from the channel
@@ -33,6 +33,19 @@ process bamToFastq {
     """
 }
 
+
+process deleteFastq {
+    input:
+    path fastq_file
+
+    script:
+    """
+    echo "Deleting ${fastq_file}..."
+    rm -f ${fastq_file}
+    """
+}
+
+
 // Workflow definition
 workflow {
     fastq_files = bam_files | bamToFastq                        // Run bamToFastq on each BAM file
@@ -41,6 +54,10 @@ workflow {
     fastq_files
         .collectFile(storeDir: params.out_dir, name: 'merged.fastq.gz')
         .set { merged_fastq_files }
+
+
+    // Delete individual FASTQ files after merging
+    fastq_files | deleteFastq
 
     // // Generate the WorkflowResult output as a JSON file
     // result = generateWorkflowResult(fastq_files)
