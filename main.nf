@@ -19,6 +19,7 @@ process bamToFastq {
     tag "${bam_file.simpleName}"                                // Tag the process with the BAM filename
     cpus params.threads                                         // Set the number of threads per process
     memory '2 GB'
+    maxForks 10
 
     input:
     path bam_file                                               // Automatically takes each BAM file from the channel
@@ -29,7 +30,7 @@ process bamToFastq {
     script:
     """
     echo "Processing ${bam_file}..."
-    samtools fastq -T * ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
+    samtools fastq -T MM,ML ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
     """
 }
 
