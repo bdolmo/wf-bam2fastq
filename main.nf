@@ -29,7 +29,7 @@ process bamToFastq {
     script:
     """
     echo "Processing ${bam_file}..."
-    samtools fastq -T MM,ML ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
+    samtools fastq -T * ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
     """
 }
 
@@ -57,7 +57,7 @@ workflow {
 
 
     // Delete individual FASTQ files after merging
-    fastq_files | deleteFastq
+    // fastq_files | deleteFastq
 
     // // Generate the WorkflowResult output as a JSON file
     // result = generateWorkflowResult(fastq_files)
