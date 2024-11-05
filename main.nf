@@ -14,7 +14,7 @@ bam_files = Channel.fromPath("${params.bam_dir}/*.bam")
 converted_files = []
 
 process bamToFastq {
-    container 'quay.io/biocontainers/samtools:1.10--h2e538c0_3'
+    container 'quay.io/biocontainers/samtools:1.21--h50ea8bc_0'
     // publishDir params.out_dir
     tag "${bam_file.simpleName}"                                // Tag the process with the BAM filename
     cpus params.threads                                         // Set the number of threads per process
