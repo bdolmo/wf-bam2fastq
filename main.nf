@@ -29,7 +29,7 @@ process bamToFastq {
     script:
     """
     echo "Processing ${bam_file}..."
-    samtools fastq ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
+    samtools fastq -T MM,ML ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
     """
 }
 
