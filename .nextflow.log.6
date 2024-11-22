@@ -1,0 +1,65 @@
+Nov-18 14:44:18.932 [main] DEBUG nextflow.cli.Launcher - $> nextflow main.nf --bam_dir /media/minion/T7/NANOPORE/TUMOR/S188428 --out_dir /home/minion/Desktop/test_wf
+Nov-18 14:44:20.351 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 24.10.0
+Nov-18 14:44:20.542 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/minion/.nextflow/plugins; core-plugins: nf-amazon@2.9.0,nf-azure@1.10.1,nf-cloudcache@0.4.2,nf-codecommit@0.2.2,nf-console@1.1.4,nf-google@1.15.2,nf-tower@1.9.3,nf-wave@1.7.2
+Nov-18 14:44:20.778 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Nov-18 14:44:20.789 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Nov-18 14:44:20.825 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Nov-18 14:44:20.978 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Nov-18 14:44:21.196 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/minion/Desktop/wf-nanofrag/nextflow.config
+Nov-18 14:44:21.218 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/minion/Desktop/wf-nanofrag/nextflow.config
+Nov-18 14:44:21.477 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/minion/.nextflow/secrets/store.json
+Nov-18 14:44:21.525 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@3b0ca5e1] - activable => nextflow.secret.LocalSecretsProvider@3b0ca5e1
+Nov-18 14:44:21.676 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Nov-18 14:44:27.131 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Nov-18 14:44:27.304 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [nasty_hoover] DSL2 - revision: 3adf39eb6c
+Nov-18 14:44:27.312 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Nov-18 14:44:27.313 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Nov-18 14:44:27.765 [main] DEBUG nextflow.Session - Session UUID: 23131592-f1e7-45ed-80e8-d88c24d0bfb3
+Nov-18 14:44:27.768 [main] DEBUG nextflow.Session - Run name: nasty_hoover
+Nov-18 14:44:27.771 [main] DEBUG nextflow.Session - Executor pool size: 16
+Nov-18 14:44:27.825 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Nov-18 14:44:27.862 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Nov-18 14:44:28.071 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 24.10.0 build 5928
+  Created: 27-10-2024 18:36 UTC (19:36 CEST)
+  System: Linux 6.8.0-48-generic
+  Runtime: Groovy 4.0.23 on OpenJDK 64-Bit Server VM 21.0.5+11-Ubuntu-1ubuntu124.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 546915@minion-VMware-Virtual-Platform [127.0.1.1]
+  CPUs: 16 - Mem: 31.3 GB (5.8 GB) - Swap: 8 GB (384.2 MB)
+Nov-18 14:44:28.331 [main] DEBUG nextflow.Session - Work-dir: /home/minion/Desktop/wf-nanofrag/work [ext2/ext3]
+Nov-18 14:44:28.675 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Nov-18 14:44:28.780 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Nov-18 14:44:29.205 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Nov-18 14:44:29.329 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 17; maxThreads: 1000
+Nov-18 14:44:30.007 [main] DEBUG nextflow.Session - Session start
+Nov-18 14:44:30.029 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/minion/Desktop/test_wf/execution/trace.txt
+Nov-18 14:44:30.079 [main] DEBUG nextflow.Session - Using default localLib path: /home/minion/Desktop/wf-nanofrag/lib
+Nov-18 14:44:30.115 [main] DEBUG nextflow.Session - Adding to the classpath library: /home/minion/Desktop/wf-nanofrag/lib
+Nov-18 14:44:30.119 [main] DEBUG nextflow.Session - Adding to the classpath library: /home/minion/Desktop/wf-nanofrag/lib/nfcore_external_java_deps.jar
+Nov-18 14:44:32.075 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Nov-18 14:44:32.172 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `help` -- Initialise it to a default value eg. `params.help = some_value`
+Nov-18 14:44:33.365 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-18 14:44:33.367 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-18 14:44:33.418 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Nov-18 14:44:33.485 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=16; memory=31.3 GB; capacity=16; pollInterval=100ms; dumpInterval=5m
+Nov-18 14:44:33.499 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Nov-18 14:44:34.144 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: fragmentExtractor
+Nov-18 14:44:34.147 [main] DEBUG nextflow.Session - Igniting dataflow network (3)
+Nov-18 14:44:34.192 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /media/minion/T7/NANOPORE/TUMOR/; pattern: S188428*.{bam,bai}; options: [:]
+Nov-18 14:44:34.203 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > fragmentExtractor
+Nov-18 14:44:34.220 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_7fec667421b3eacc: /home/minion/Desktop/wf-nanofrag/main.nf
+Nov-18 14:44:34.221 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Nov-18 14:44:34.222 [main] DEBUG nextflow.Session - Session await
+Nov-18 14:44:34.344 [main] DEBUG nextflow.Session - Session await > all processes finished
+Nov-18 14:44:34.394 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Nov-18 14:44:34.397 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Nov-18 14:44:34.419 [main] INFO  nextflow.script.BaseScript - Workflow execution completed successfully. Fragmentation metrics are saved in the '/home/minion/Desktop/test_wf' directory.
+Nov-18 14:44:34.592 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Nov-18 14:44:34.595 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Nov-18 14:44:34.618 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+Nov-18 14:44:37.541 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+Nov-18 14:44:38.099 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Nov-18 14:44:38.433 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Nov-18 14:44:38.443 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

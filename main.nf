@@ -2,86 +2,112 @@
 
 nextflow.enable.dsl = 2
 
-// Define parameters for input/output directories and maximum CPU threads
-params.bam_dir = "/home/minion/Desktop/wf-template/test_data"   // Path where BAM files are located
-params.out_dir = "/home/minion/Desktop/output_test"             // Output directory for FASTQ files
-params.threads = 12                                              // Number of threads for samtools
+// Define parameters for input/output directories and paths
+params.tumor_list = null                                        // Path to tumor BAM list (txt file)
+params.normal_list = null                                       // Path to normal BAM list (txt file)
+params.reference = null                                         // Path to the reference genome (FASTA file)
+params.out_dir = "./nanofrag_results"                          // Directory to save output metrics
+params.threads = 12                                             // Number of threads
+params.skip_small_variants = true                              // Whether to skip small variants (flag)
 
-// Create a channel for BAM files
-bam_files = Channel.fromPath("${params.bam_dir}/*.bam")
+if (params.help) {
+    log.info """
+    Nanofrag Analysis
+    =============================================
+    Usage:
+        nextflow run main.nf --tumor_list <file> --normal_list <file> --reference <file> --out_dir <dir> --threads <number>
+    Input:
+        * --tumor_list: path to the text file listing tumor BAM files
+        * --normal_list: path to the text file listing normal BAM files
+        * --reference: path to the reference genome (FASTA file)
+        * --out_dir: output directory. Default [${params.out_dir}]
+        * --threads: number of threads. Default [${params.threads}]
+        * --skip_small_variants: flag to skip small variants. Default [${params.skip_small_variants}]
+    """
+    exit 0
+}
 
-// Track converted files
-converted_files = []
+// Ensure mandatory parameters are provided
+if (!params.tumor_list || !params.normal_list || !params.reference) {
+    throw new IllegalArgumentException("Missing required parameters: --tumor_list, --normal_list, or --reference")
+}
 
-process bamToFastq {
-    container 'quay.io/biocontainers/samtools:1.21--h50ea8bc_0'
-    // publishDir params.out_dir
-    tag "${bam_file.simpleName}"                                // Tag the process with the BAM filename
-    cpus params.threads                                         // Set the number of threads per process
-    memory '2 GB'
-    maxForks 10
+// Ensure the output directory exists
+if (!new File(params.out_dir).exists()) {
+    new File(params.out_dir).mkdirs()
+}
+
+// Create channels for inputs
+tumor_list = Channel.fromPath(params.tumor_list)
+normal_list = Channel.fromPath(params.normal_list)
+reference = Channel.fromPath(params.reference)
+
+process runNanofrag {
+    tag "nanofrag"
+    memory '12 GB'
+    cpus params.threads
+    conda params.conda_yaml
 
     input:
-    path bam_file                                               // Automatically takes each BAM file from the channel
+    path tumor_list
+    path normal_list
+    path reference
 
     output:
-    path "${bam_file.simpleName}.fastq.gz"     // Save output to the specified directory and track paths
 
     script:
     """
-    echo "Processing ${bam_file}..."
-    samtools fastq -T MM,ML ${bam_file} | gzip > ${bam_file.simpleName}.fastq.gz
+    echo "Running Nanofrag with tumor list ${tumor_list}, normal list ${normal_list}, and reference genome ${reference}..."
+    python3 ${projectDir}/bin/nanofrag/nanofrag.py \\
+        --tumor_list ${tumor_list} \\
+        --normal_list ${normal_list} \\
+        --reference ${reference} \\
+        --output_dir . \\
+        --threads ${params.threads} \\
+        ${params.skip_small_variants ? '--skip_small_variants' : ''}
     """
 }
-
-
-process deleteFastq {
-    input:
-    path fastq_file
-
-    script:
-    """
-    echo "Deleting ${fastq_file}..."
-    rm -f ${fastq_file}
-    """
-}
-
 
 // Workflow definition
 workflow {
-    fastq_files = bam_files | bamToFastq                        // Run bamToFastq on each BAM file
-
-    // Collect all resulting FASTQ files into a single list
-    fastq_files
-        .collectFile(storeDir: params.out_dir, name: 'merged.fastq.gz')
-        .set { merged_fastq_files }
-
-
-    // Delete individual FASTQ files after merging
-    // fastq_files | deleteFastq
-
-    // // Generate the WorkflowResult output as a JSON file
-    // result = generateWorkflowResult(fastq_files)
-    // result.view() // Display result on the console (for debugging)
-    // result.save("$params.out_dir/workflow_result.json")
+    runNanofrag(tumor_list, normal_list, reference)
 }
 
 workflow.onComplete {
-    println "Workflow execution completed successfully."
+    println "Nanofrag analysis completed successfully. Results are saved in '${params.out_dir}'."
 }
 
-// Function to generate WorkflowResult JSON structure
-// def generateWorkflowResult(fastq_files) {
-//     def workflow_pass = fastq_files.map{it.exists()}    // Check if all files were created successfully
 
-//     println workflow_pass
 
-//     def converted_files = fastq_files.collect { it.toString() } // Collect paths as strings
 
-//     def result = [
-//         workflow_pass   : workflow_pass,
-//         converted_files : converted_files
-//     ]
-    
-//     return Channel.value(result)
+// process fragmentExtractor {
+//     tag "${bam_file.simpleName}"                                // Tag the process with the BAM filename
+//     memory '2 GB'
+
+//     input:
+//     path bed_file
+//     path bam_file
+//     path bai_file
+
+//     output:
+//     path "${bam_file.simpleName}_fragments.bed" // Output BED file
+//     path "${bam_file.simpleName}_fragments.wig" // Output WIG file
+
+//     script:
+//     """
+//     echo "Processing ${bam_file} with ${bed_file}..."
+//     fragment_extractor ${bam_file} ${bed_file} \
+//         ${bam_file.simpleName}_fragments.bed \
+//         ${bam_file.simpleName}_fragments.wig
+//     """
+// }
+
+// // Workflow definition
+// workflow {
+//     results = fragmentExtractor(windows_bed, bam_files, bai_files)
+
+// }
+
+// workflow.onComplete {
+//     println "Workflow execution completed successfully. Fragmentation metrics are saved in the '${params.out_dir}' directory."
 // }

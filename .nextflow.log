@@ -1,0 +1,56 @@
+Nov-22 14:07:24.338 [main] DEBUG nextflow.cli.Launcher - $> nextflow main.nf --tumor_list /home/minion/Desktop/tumor_bams.txt --normal_list /home/minion/Desktop/normal_bams.txt --reference /home/minion/Desktop/GRCh38.p14.genome.fa --out_dir /home/minion/Desktop/test_wf2 --threads 8 --skip_small_variants
+Nov-22 14:07:25.504 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 24.10.0
+Nov-22 14:07:25.768 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/minion/.nextflow/plugins; core-plugins: nf-amazon@2.9.0,nf-azure@1.10.1,nf-cloudcache@0.4.2,nf-codecommit@0.2.2,nf-console@1.1.4,nf-google@1.15.2,nf-tower@1.9.3,nf-wave@1.7.2
+Nov-22 14:07:26.275 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Nov-22 14:07:26.285 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Nov-22 14:07:26.321 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Nov-22 14:07:26.560 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Nov-22 14:07:26.757 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/minion/Desktop/wf-nanofrag/nextflow.config
+Nov-22 14:07:26.776 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/minion/Desktop/wf-nanofrag/nextflow.config
+Nov-22 14:07:27.035 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/minion/.nextflow/secrets/store.json
+Nov-22 14:07:27.073 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@3b0ca5e1] - activable => nextflow.secret.LocalSecretsProvider@3b0ca5e1
+Nov-22 14:07:27.268 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Nov-22 14:07:33.085 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Nov-22 14:07:33.292 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [hopeful_avogadro] DSL2 - revision: 07c669387f
+Nov-22 14:07:33.300 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Nov-22 14:07:33.301 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Nov-22 14:07:33.668 [main] DEBUG nextflow.Session - Session UUID: b104e7de-45c5-475e-ae1a-2c89ae6916ff
+Nov-22 14:07:33.669 [main] DEBUG nextflow.Session - Run name: hopeful_avogadro
+Nov-22 14:07:33.671 [main] DEBUG nextflow.Session - Executor pool size: 16
+Nov-22 14:07:33.731 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Nov-22 14:07:33.768 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=48; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Nov-22 14:07:34.251 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 24.10.0 build 5928
+  Created: 27-10-2024 18:36 UTC (19:36 CEST)
+  System: Linux 6.8.0-48-generic
+  Runtime: Groovy 4.0.23 on OpenJDK 64-Bit Server VM 21.0.5+11-Ubuntu-1ubuntu124.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 1675213@minion-VMware-Virtual-Platform [127.0.1.1]
+  CPUs: 16 - Mem: 31.3 GB (296.1 MB) - Swap: 8 GB (608 KB)
+Nov-22 14:07:34.764 [main] DEBUG nextflow.Session - Work-dir: /home/minion/Desktop/wf-nanofrag/work [ext2/ext3]
+Nov-22 14:07:35.114 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Nov-22 14:07:35.204 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Nov-22 14:07:35.630 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Nov-22 14:07:35.786 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 17; maxThreads: 1000
+Nov-22 14:07:36.746 [main] DEBUG nextflow.Session - Session start
+Nov-22 14:07:36.763 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/minion/Desktop/test_wf2/execution/trace.txt
+Nov-22 14:07:36.810 [main] DEBUG nextflow.Session - Using default localLib path: /home/minion/Desktop/wf-nanofrag/lib
+Nov-22 14:07:36.844 [main] DEBUG nextflow.Session - Adding to the classpath library: /home/minion/Desktop/wf-nanofrag/lib
+Nov-22 14:07:36.847 [main] DEBUG nextflow.Session - Adding to the classpath library: /home/minion/Desktop/wf-nanofrag/lib/nfcore_external_java_deps.jar
+Nov-22 14:07:38.530 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Nov-22 14:07:38.605 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `help` -- Initialise it to a default value eg. `params.help = some_value`
+Nov-22 14:07:39.508 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Nov-22 14:07:39.510 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Nov-22 14:07:39.550 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Nov-22 14:07:39.607 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=16; memory=31.3 GB; capacity=16; pollInterval=100ms; dumpInterval=5m
+Nov-22 14:07:39.621 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Nov-22 14:07:40.096 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: runNanofrag
+Nov-22 14:07:40.168 [main] WARN  nextflow.Session - There's no process matching config selector: ichorCNV
+Nov-22 14:07:40.175 [main] WARN  nextflow.Session - There's no process matching config selector: nanoMix
+Nov-22 14:07:40.179 [main] DEBUG nextflow.Session - Igniting dataflow network (4)
+Nov-22 14:07:40.226 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > runNanofrag
+Nov-22 14:07:40.232 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_9a653e9d6de75c89: /home/minion/Desktop/wf-nanofrag/main.nf
+Nov-22 14:07:40.233 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Nov-22 14:07:40.233 [main] DEBUG nextflow.Session - Session await
+Nov-22 14:07:41.734 [Actor Thread 6] INFO  nextflow.conda.CondaCache - Creating env using conda: /home/minion/Desktop/wf-nanofrag/data/conda.yaml [cache /home/minion/Desktop/wf-nanofrag/work/conda/nanofrag_env-f205536726f2d97670c22e68ccdb451c]

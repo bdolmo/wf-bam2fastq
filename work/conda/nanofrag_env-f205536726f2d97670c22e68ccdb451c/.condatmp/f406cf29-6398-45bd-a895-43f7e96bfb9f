@@ -1,0 +1,11 @@
+prefix=/home/minion/Desktop/wf-nanofrag/work/conda/nanofrag_env-f205536726f2d97670c22e68ccdb451c
+exec_prefix=/home/minion/Desktop/wf-nanofrag/work/conda/nanofrag_env-f205536726f2d97670c22e68ccdb451c
+libdir=/home/minion/Desktop/wf-nanofrag/work/conda/nanofrag_env-f205536726f2d97670c22e68ccdb451c/lib
+includedir=/home/minion/Desktop/wf-nanofrag/work/conda/nanofrag_env-f205536726f2d97670c22e68ccdb451c/include
+
+Name: uuid
+Description: Universally unique id library
+Version: 2.32.1
+Requires:
+Cflags: -I${includedir}/uuid
+Libs: -L${libdir} -luuid
